@@ -1,15 +1,13 @@
-from flask import Flask
+from app import app
+from app.config.database import db
 
-app=Flask(__name__)
 @app.route('/')
-def home():
-    return "hekko"
-@app.route('/a')
-def home():
-    return "a"
+def hello_world():
+    return 'Hello, World!'
 
 if __name__ == '__main__':
-    #DEBUG is SET to TRUE. CHANGE FOR PROD
-    app.run(port=5000,debug=True)
+    with app.app_context():
+        db.create_all()
+    app.run(debug=True)
 
 
